@@ -3,7 +3,7 @@ import type { LineConfig } from '@ant-design/charts'
 
 import { Line } from '@ant-design/charts'
 
-const AreaChart = () => {
+const ActiveUsersChart = () => {
     const data = [
         { day: '1', users: 23, device: 'mobile' },
         { day: '1', users: 42, device: 'desktop' },
@@ -77,4 +77,4 @@ const AreaChart = () => {
     return <Line {...config} />
 }
 
-export default AreaChart
+export default ActiveUsersChart
