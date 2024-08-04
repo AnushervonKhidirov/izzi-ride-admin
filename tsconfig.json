@@ -19,10 +19,11 @@
         ],
         "paths": {
             "@app/*": ["./src/app/*"],
-            "@components/*": ["./src/components/*"],
-            "@common/*": ["./src/components/common/*"],
-            "@charts/*": ["./src/components/charts/*"],
-            "@helpers/*": ["./src/helpers/*"],
+            "@chart/*": ["./src/component/chart/*"],
+            "@common/*": ["./src/component/common/*"],
+            "@component/*": ["./src/component/*"],
+            "@constant/*": ["./src/constant/*"],
+            "@helper/*": ["./src/helper/*"],
             "@/*": ["./src/*"]
         }
     },

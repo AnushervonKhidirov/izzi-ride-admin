@@ -1,13 +1,8 @@
-import DashboardItem from '@components/dashboard-item/dashboard-item'
-import ActiveUsersChart from '@components/charts/active-users/active-users'
+import DashboardItem from '@/component/dashboard-item/dashboard-item'
+import AreaChart from '@chart/area-chart/area-chart'
 
 const Home = () => {
-    return (
-        <>
-            <DashboardItem title='Total visitors' amount={140} updatedAt={'07-22-2024 22:22'} />
-            <ActiveUsersChart />
-        </>
-    )
+    return <></>
 }
 
 export default Home

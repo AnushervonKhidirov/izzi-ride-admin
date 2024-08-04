@@ -2,7 +2,7 @@ import type { FC } from 'react'
 
 import Card from '../common/card/card'
 
-import dateToText from '@helpers/dateToText'
+import dateToText from '@helper/dateToText'
 
 import styles from './dashboard-item.module.css'
 

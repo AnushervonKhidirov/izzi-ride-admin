@@ -1,5 +1,8 @@
-body {
-    background-color: #2d3038;
+:root {
+    --primary: #407bff;
+    --secondary: #314064;
+    --tertiary: #dce4f4;
+    --darkGrey: #414141;
 }
 
 * {
