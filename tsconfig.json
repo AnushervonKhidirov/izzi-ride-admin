@@ -24,6 +24,7 @@
             "@component/*": ["./src/component/*"],
             "@constant/*": ["./src/constant/*"],
             "@helper/*": ["./src/helper/*"],
+            "@type/*": ["./src/type/*"],
             "@/*": ["./src/*"]
         }
     },
