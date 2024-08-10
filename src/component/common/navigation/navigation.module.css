@@ -1,0 +1,17 @@
+.navigation {
+    display: grid;
+    gap: 0.75em;
+}
+
+.navigation_item {
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.navigation_item:hover {
+    opacity: 0.75;
+}
+
+.navigation_item.active {
+    opacity: 1;
+}

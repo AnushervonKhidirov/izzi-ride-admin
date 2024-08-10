@@ -3,8 +3,6 @@ import type { ReactNode } from 'react'
 
 import { Roboto } from 'next/font/google'
 
-import Content from './content'
-
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -21,7 +19,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
         <html lang='en'>
             <body className={roboto.className}>
-                <Content>{children}</Content>
+                {children}
             </body>
         </html>
     )

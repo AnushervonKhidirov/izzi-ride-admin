@@ -18,13 +18,18 @@
             }
         ],
         "paths": {
+            "@public/*": ["./public/*"],
+            "@images/*": ["./public/images/*"],
             "@app/*": ["./src/app/*"],
+            "@assets/*": ["./src/assets/*"],
             "@chart/*": ["./src/component/chart/*"],
             "@common/*": ["./src/component/common/*"],
             "@component/*": ["./src/component/*"],
             "@constant/*": ["./src/constant/*"],
             "@helper/*": ["./src/helper/*"],
+            "@store/*": ["./src/service/store/*"],
             "@type/*": ["./src/type/*"],
+            "@hoc/*": ["./src/hoc/*"],
             "@/*": ["./src/*"]
         }
     },

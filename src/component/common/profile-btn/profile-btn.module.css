@@ -1,0 +1,29 @@
+.profile_btn {
+    display: grid;
+    grid-template-areas: 
+        'icon .'
+        'icon name'
+        'icon role'
+        'icon .';
+    align-content: center;
+    gap: 0 0.5em;
+}
+
+.profile_icon {
+    grid-area: icon;
+    fill: var(--secondary);
+    transition: fill 0.3s;
+}
+
+.profile_btn:hover .profile_icon {
+    fill: var(--primary);
+}
+
+.user_name {
+    grid-area: name;
+}
+
+.user_role {
+    grid-area: role;
+    font-size: 0.75em;
+}
