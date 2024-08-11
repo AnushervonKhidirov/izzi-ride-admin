@@ -1,0 +1,18 @@
+.form {
+    display: grid;
+    gap: 1em;
+}
+
+.form button[type='submit'] {
+    background-color: var(--secondary);
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.form button[type='submit']:hover {
+    background-color: var(--primary);
+}
+
+.additional_content a {
+    color: var(--primary);
+}
