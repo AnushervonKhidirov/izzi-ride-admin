@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
     const userName = request.cookies.get('userName')
     const role = request.cookies.get('role')
 
-    if (userName || !role) {
+    if (!userName || !role) {
         return NextResponse.redirect(new URL(SIGN_IN_PAGE, request.url))
     }
 
