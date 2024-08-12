@@ -15,8 +15,6 @@ const Form: FC<TForm> = ({ endpoint, inputs, className, buttonText = 'submit', c
         const formData = new FormData(e.currentTarget)
         const body = Object.fromEntries(formData)
 
-        console.log(body)
-
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',
