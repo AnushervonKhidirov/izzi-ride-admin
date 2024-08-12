@@ -28,6 +28,7 @@
             "@constant/*": ["./src/constant/*"],
             "@helper/*": ["./src/helper/*"],
             "@store/*": ["./src/service/store/*"],
+            "@middleware/*": ["./src/service/middleware/*"],
             "@type/*": ["./src/type/*"],
             "@hoc/*": ["./src/hoc/*"],
             "@/*": ["./src/*"]
