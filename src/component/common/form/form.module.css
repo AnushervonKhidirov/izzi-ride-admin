@@ -3,8 +3,13 @@
     gap: 1em;
 }
 
+.form_element > * {
+    font-size: 1em;
+}
+
 .form button[type='submit'] {
     background-color: var(--secondary);
+    font-size: 1em;
     font-weight: 700;
     text-transform: capitalize;
 }
