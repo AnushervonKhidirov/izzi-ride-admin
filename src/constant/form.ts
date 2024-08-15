@@ -4,7 +4,7 @@ export const signInInputs: TextFieldProps[] = [
     {
         name: 'email',
         type: 'email',
-        label: 'Email',
+        label: 'Login',
         required: true,
     },
     {

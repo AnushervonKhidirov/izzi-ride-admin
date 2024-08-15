@@ -9,29 +9,9 @@ import { PasswordInput } from '@common/input/input'
 import styles from './form.module.css'
 import classNames from 'classnames'
 
-const Form: FC<TForm> = ({ endpoint, inputs, className, buttonText = 'submit', children }) => {
-    async function onSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        const body = Object.fromEntries(formData)
-
-        try {
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            if (!response.ok) throw new Error('whoops')
-        } catch (err: any) {
-            console.log(err)
-        }
-    }
-
+const Form: FC<TForm> = ({ inputs, className, buttonText = 'submit', children, submitFunc }) => {
     return (
-        <form onSubmit={onSubmit} className={classNames(styles.form, className)}>
+        <form onSubmit={submitFunc} className={classNames(styles.form, className)}>
             {inputs.map(input => (
                 <Field
                     key={input.name}
@@ -64,7 +44,15 @@ const Field: FC<TextFieldProps> = ({ name, type, label, required }) => {
             <InputLabel size='small' htmlFor={name} style={{ fontSize: '1em' }}>
                 {required ? `${label} *` : label}
             </InputLabel>
-            <Input size='small' id={name} name={name} type={type} label={label} required={required} style={{ fontSize: '1em' }} />
+            <Input
+                size='small'
+                id={name}
+                name={name}
+                type={type}
+                label={label}
+                required={required}
+                style={{ fontSize: '1em' }}
+            />
         </FormControl>
     )
 }
