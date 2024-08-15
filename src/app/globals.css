@@ -20,11 +20,6 @@ body {
     color: var(--darkGrey);
 }
 
-body:has(header) {
-    grid-template-areas: 'header main';
-    grid-template-columns: 12vw 1fr;
-}
-
 main {
     grid-area: main;
 }
@@ -61,17 +56,24 @@ a {
 
 /* desktop */
 @media screen and (min-width: 1024px) {
-   
+
 }
 
-@media screen and (min-width: 786px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
     body {
         font-size: 13px;
     }
 }
 
+@media screen and (min-width: 768px) {
+    body:has(header) {
+        grid-template-areas: 'header main';
+        grid-template-columns: 13em 1fr;
+    }
+}
+
 /* tablet */
-@media screen and (min-width: 425px) and (max-width: 786px) {
+@media screen and (min-width: 425px) and (max-width: 768px) {
     body {
         font-size: 1.75vw;
     }
