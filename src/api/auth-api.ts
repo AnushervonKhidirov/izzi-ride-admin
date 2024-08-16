@@ -4,9 +4,9 @@ import type { TUser, TTokens, TSignInData } from '@type/auth'
 import { GET_USER_DATA_ENDPOINT, REFRESH_TOKEN_ENDPOINT, SIGN_IN_ENDPOINT } from '@constant/endpoint'
 import { TOKEN_EXPIRED_CODE, TOKEN_EXPIRED_TEXT } from '@constant/auth'
 
-type RequestFunc<T, U> = (data: U) => Promise<[null, ErrorRequest] | [T, null]>
+type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorRequest] | [U, null]>
 
-export const signIn: RequestFunc<TTokens, TSignInData> = async logInData => {
+export const signIn: RequestFunc<TSignInData, TTokens> = async logInData => {
     try {
         const signInRequest = await fetch(SIGN_IN_ENDPOINT, {
             method: 'POST',
@@ -28,7 +28,7 @@ export const signIn: RequestFunc<TTokens, TSignInData> = async logInData => {
     }
 }
 
-export const getUser: RequestFunc<TUser, string | undefined> = async token => {
+export const getUser: RequestFunc<string | undefined, TUser> = async token => {
     if (!token) return [null, new Error('token is not provided')]
 
     try {
@@ -50,7 +50,7 @@ export const getUser: RequestFunc<TUser, string | undefined> = async token => {
     }
 }
 
-export const refreshToken: RequestFunc<TTokens, string | undefined> = async refreshToken => {
+export const refreshToken: RequestFunc<string | undefined, TTokens> = async refreshToken => {
     if (!refreshToken) return [null, new Error('token is not provided')]
 
     try {
@@ -76,7 +76,7 @@ export const refreshToken: RequestFunc<TTokens, string | undefined> = async refr
     }
 }
 
-export const getUserWithRefresh: RequestFunc<TUser, TTokens> = async tokens => {
+export const getUserWithRefresh: RequestFunc<TTokens, TUser> = async tokens => {
     const [user, userErr] = await getUser(tokens.access_token)
 
     if (userErr) {
@@ -85,8 +85,6 @@ export const getUserWithRefresh: RequestFunc<TUser, TTokens> = async tokens => {
             userErr.cause.status === TOKEN_EXPIRED_CODE &&
             userErr.cause.statusText === TOKEN_EXPIRED_TEXT
         ) {
-            console.log('refreshToken');
-            
             const [updatedTokens, tokenErr] = await refreshToken(tokens.refresh_token)
 
             if (tokenErr) return [null, tokenErr]
