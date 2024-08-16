@@ -1,38 +1,41 @@
 'use client'
+import type { TSignInData } from '@type/auth'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Form from '@common/form/form'
 
-import { SIGN_IN_ENDPOINT } from '@constant/endpoint'
 import { JOIN_PAGE } from '@constant/links'
 import { signInInputs } from '@constant/form'
 
+import { signIn } from '@api/auth-api'
 import { addCookies } from '@helper/cookies'
 import { FormEvent } from 'react'
 
 const LogIn = () => {
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+
     async function submitFunc(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
+
+        setLoading(true)
+
         const formData = new FormData(e.currentTarget)
-        const body = Object.fromEntries(formData)
+        const body = Object.fromEntries(formData) as TSignInData
 
-        try {
-            const response = await fetch(SIGN_IN_ENDPOINT, {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+        const [user, err] = await signIn(body)
 
-            if (!response.ok) throw new Error('whoops')
+        setLoading(false)
 
-            const result = await response.json()
+        if (err) {
+            alert(err)
+        } else {
+            addCookies(user)
 
-            console.log(result)
-
-            addCookies(result)
-        } catch (err: any) {
-            console.log(err)
+            // TODO: redirect back to previous page
+            router.push('/')
         }
     }
 
@@ -41,7 +44,7 @@ const LogIn = () => {
             <div className='form_overlay'>
                 <h1>Sign In</h1>
 
-                <Form inputs={signInInputs} buttonText='Sign in' submitFunc={submitFunc}>
+                <Form inputs={signInInputs} loading={loading} buttonText='Sign in' submitFunc={submitFunc}>
                     Don't have account?{' '}
                     <Link href={JOIN_PAGE} title='Request to join'>
                         Request to join

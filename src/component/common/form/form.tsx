@@ -3,13 +3,14 @@ import type { FC, FormEvent } from 'react'
 import type { TextFieldProps } from '@mui/material'
 import type { TForm } from '@type/form'
 
-import { Button, FormControl, InputLabel, OutlinedInput } from '@mui/material'
+import { FormControl, InputLabel, OutlinedInput, CircularProgress } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import { PasswordInput } from '@common/input/input'
 
 import styles from './form.module.css'
 import classNames from 'classnames'
 
-const Form: FC<TForm> = ({ inputs, className, buttonText = 'submit', children, submitFunc }) => {
+const Form: FC<TForm> = ({ inputs, className, loading = false, buttonText = 'submit', children, submitFunc }) => {
     return (
         <form onSubmit={submitFunc} className={classNames(styles.form, className)}>
             {inputs.map(input => (
@@ -22,9 +23,16 @@ const Form: FC<TForm> = ({ inputs, className, buttonText = 'submit', children, s
                 />
             ))}
 
-            <Button size='medium' variant='contained' title={buttonText} type='submit'>
+            <LoadingButton
+                loading={loading}
+                loadingIndicator={<>{buttonText} <CircularProgress className={styles.loading_icon} /></>}
+                size='medium'
+                variant='contained'
+                title={buttonText}
+                type='submit'
+            >
                 {buttonText}
-            </Button>
+            </LoadingButton>
 
             <div className={styles.additional_content}>{children}</div>
         </form>
