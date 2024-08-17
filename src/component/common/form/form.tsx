@@ -1,10 +1,10 @@
 'use client'
-import type { FC, FormEvent } from 'react'
+import type { FC } from 'react'
 import type { TextFieldProps } from '@mui/material'
 import type { TForm } from '@type/form'
 
-import { FormControl, InputLabel, OutlinedInput, CircularProgress } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
+import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
+import { FormBtn } from '@common/button/button'
 import { PasswordInput } from '@common/input/input'
 
 import styles from './form.module.css'
@@ -23,16 +23,7 @@ const Form: FC<TForm> = ({ inputs, className, loading = false, buttonText = 'sub
                 />
             ))}
 
-            <LoadingButton
-                loading={loading}
-                loadingIndicator={<>{buttonText} <CircularProgress className={styles.loading_icon} /></>}
-                size='medium'
-                variant='contained'
-                title={buttonText}
-                type='submit'
-            >
-                {buttonText}
-            </LoadingButton>
+            <FormBtn loading={loading} title={buttonText} />
 
             <div className={styles.additional_content}>{children}</div>
         </form>

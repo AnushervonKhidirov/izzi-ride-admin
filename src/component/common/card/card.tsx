@@ -11,7 +11,7 @@ type TCard = {
 }
 
 const Card: FC<TCard> = ({ children, className }) => {
-    return <div className={classNames(styles.card, className && className)}>{children}</div>
+    return <div className={classNames(styles.card, className)}>{children}</div>
 }
 
 export default Card

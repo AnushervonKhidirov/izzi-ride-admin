@@ -7,28 +7,6 @@
     font-size: 1em;
 }
 
-.form button[type='submit'] {
-    background-color: var(--secondary);
-    font-size: 1em;
-    font-weight: 700;
-    text-transform: capitalize;
-}
-
-.form button[type='submit']:hover {
-    background-color: var(--primary);
-}
-
-.form button[type='submit'] span {
-    align-items: center;
-    gap: 1em;
-    color: #fff;
-}
-
 .additional_content a {
     color: var(--primary);
-}
-
-.loading_icon {
-    width: 1.25em !important;
-    height: 1.25em !important;
 }
