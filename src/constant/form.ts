@@ -17,13 +17,13 @@ export const signInInputs: TextFieldProps[] = [
 
 export const joinInputs: TextFieldProps[] = [
     {
-        name: 'name',
+        name: 'first_name',
         type: 'text',
         label: 'First name',
         required: true,
     },
     {
-        name: 'surname',
+        name: 'last_name',
         type: 'text',
         label: 'Last name',
     },

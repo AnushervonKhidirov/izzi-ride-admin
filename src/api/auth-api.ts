@@ -1,28 +1,50 @@
 import type { ErrorRequest } from '@type/error'
-import type { TUser, TTokens, TSignInData } from '@type/auth'
+import type { TUser, TTokens, TSignInData, TJoinData } from '@type/auth'
 
-import { GET_USER_DATA_ENDPOINT, REFRESH_TOKEN_ENDPOINT, SIGN_IN_ENDPOINT } from '@constant/endpoint'
+import { GET_USER_DATA_ENDPOINT, JOIN_ENDPOINT, REFRESH_TOKEN_ENDPOINT, SIGN_IN_ENDPOINT } from '@constant/endpoint'
 import { TOKEN_EXPIRED_CODE, TOKEN_EXPIRED_TEXT } from '@constant/auth'
 
 type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorRequest] | [U, null]>
 
-export const signIn: RequestFunc<TSignInData, TTokens> = async logInData => {
+export const signIn: RequestFunc<TSignInData, TTokens> = async body => {
     try {
         const signInRequest = await fetch(SIGN_IN_ENDPOINT, {
             method: 'POST',
-            body: JSON.stringify(logInData),
+            body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json',
             },
         })
 
         if (!signInRequest.ok) {
-            throw new Error('Cant sign in, check entered data', {
+            throw new Error('Cant sign in, check entered data or join', {
                 cause: signInRequest,
             })
         }
 
         return [await signInRequest.json(), null]
+    } catch (err: any) {
+        return [null, err]
+    }
+}
+
+export const join: RequestFunc<TJoinData, any> = async body => {
+    try {
+        const joinRequest = await fetch(JOIN_ENDPOINT, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+        if (!joinRequest.ok) {
+            throw new Error('Cant join, try again later', {
+                cause: joinRequest,
+            })
+        }
+
+        return [await joinRequest.json(), null]
     } catch (err: any) {
         return [null, err]
     }
@@ -39,7 +61,7 @@ export const getUser: RequestFunc<string | undefined, TUser> = async token => {
         })
 
         if (!userRequest.ok) {
-            throw new Error("Can't sign in, pleas try again later", {
+            throw new Error("Can't get user, try to refresh token", {
                 cause: userRequest,
             })
         }
@@ -65,7 +87,7 @@ export const refreshToken: RequestFunc<string | undefined, TTokens> = async refr
         })
 
         if (!tokenRequest.ok) {
-            throw new Error("Can't refresh token, pleas try again later", {
+            throw new Error("Can't refresh token, pleas sign in again", {
                 cause: tokenRequest,
             })
         }

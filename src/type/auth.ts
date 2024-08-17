@@ -18,3 +18,8 @@ export type TSignInData = {
     email: string
     password: string
 }
+
+export type TJoinData = {
+    first_name: string
+    last_name?: string
+}
