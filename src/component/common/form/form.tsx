@@ -7,8 +7,8 @@ import { FormControl, InputLabel, OutlinedInput } from '@mui/material'
 import { FormBtn } from '@common/button/button'
 import { PasswordInput } from '@common/input/input'
 
-import styles from './form.module.css'
 import classNames from 'classnames'
+import styles from './form.module.css'
 
 const Form: FC<TForm> = ({ inputs, className, loading = false, buttonText = 'submit', children, submitFunc }) => {
     return (
