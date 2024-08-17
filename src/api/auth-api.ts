@@ -1,10 +1,10 @@
-import type { ErrorRequest } from '@type/error'
+import type { ErrorCustom } from '@type/error'
 import type { TUser, TTokens, TSignInData, TJoinData } from '@type/auth'
 
 import { GET_USER_DATA_ENDPOINT, JOIN_ENDPOINT, REFRESH_TOKEN_ENDPOINT, SIGN_IN_ENDPOINT } from '@constant/endpoint'
 import { TOKEN_EXPIRED_CODE, TOKEN_EXPIRED_TEXT } from '@constant/auth'
 
-type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorRequest] | [U, null]>
+type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorCustom<Response>] | [U, null]>
 
 export const signIn: RequestFunc<TSignInData, TTokens> = async body => {
     try {

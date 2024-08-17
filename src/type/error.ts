@@ -1,8 +1,4 @@
-export type ErrorCustom = {
+export type ErrorCustom<T> = {
     massage?: string
-    cause?: any
-}
-
-export type ErrorRequest = Omit<ErrorCustom, 'cause'> & {
-    cause?: Response
+    cause?: T
 }
