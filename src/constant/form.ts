@@ -1,10 +1,10 @@
 import type { TextFieldProps } from '@mui/material'
 
-export const signInInputs: TextFieldProps[] = [
+export const logInInputs: TextFieldProps[] = [
     {
-        name: 'email',
-        type: 'email',
-        label: 'Login',
+        name: 'username',
+        type: 'text',
+        label: 'login',
         required: true,
     },
     {

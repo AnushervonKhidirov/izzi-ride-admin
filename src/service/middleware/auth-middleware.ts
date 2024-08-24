@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 
 import { getUserWithRefresh } from '@api/auth-api'
 import { USER_HEADER } from '@constant/headers'
-import { SIGN_IN_PAGE } from '@constant/links'
+import { LOG_IN_PAGE } from '@constant/links'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@constant/auth'
 
 export function authMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
@@ -17,13 +17,12 @@ export function authMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
 
         if (accessToken && refreshToken) {
             const [user, err] = await getUserWithRefresh({
-                access_token: accessToken,
-                refresh_token: refreshToken,
+                accessToken: accessToken,
+                refreshToken: refreshToken,
             })
 
-            if (err) return NextResponse.redirect(new URL(SIGN_IN_PAGE, request.url))
+            if (err) return NextResponse.redirect(new URL(LOG_IN_PAGE, request.url))
 
-            user.role = 'marketer'
             request.headers.set(USER_HEADER, JSON.stringify(user))
         }
 

@@ -21,7 +21,9 @@ const ProfileButton: FC = () => {
                     className={styles.profile_icon}
                     style={{ width: '100%', height: '100%', fill: COLORS.secondary }}
                 />
-                <div className={styles.user_name}>{user.name}</div>
+                <div className={styles.user_name}>
+                    {user.firstName} {user.lastName}
+                </div>
                 <div className={styles.user_role}>{user.role}</div>
             </Link>
         )

@@ -1,21 +1,26 @@
 export type TUser = {
     id: number
+    username: string
+    firstName: string
+    lastName: string
+    gender: TGender
     email: string
-    password: string
-    name: string
+    phone: string
     role: TUserRole
-    avatar: string
 }
 
 export type TUserRole = 'admin' | 'marketer'
+export type TGender = 'male' | 'female'
 
 export type TTokens = {
-    access_token: string
-    refresh_token: string
+    // NOTE: fake api only
+    token?: string
+    accessToken: string
+    refreshToken: string
 }
 
-export type TSignInData = {
-    email: string
+export type TLogInData = {
+    username: string
     password: string
 }
 

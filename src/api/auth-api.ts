@@ -1,14 +1,23 @@
 import type { ErrorCustom } from '@type/error'
-import type { TUser, TTokens, TSignInData, TJoinData } from '@type/auth'
+import type { TUser, TTokens, TLogInData, TJoinData } from '@type/auth'
 
-import { GET_USER_DATA_ENDPOINT, JOIN_ENDPOINT, REFRESH_TOKEN_ENDPOINT, SIGN_IN_ENDPOINT } from '@constant/endpoint'
+import {
+    GET_USER_ENDPOINT,
+    JOIN_ENDPOINT,
+    REFRESH_TOKEN_ENDPOINT,
+    LOG_IN_ENDPOINT,
+    GET_ALL_USERS_ENDPOINT,
+} from '@constant/endpoint'
 import { TOKEN_EXPIRED_CODE, TOKEN_EXPIRED_TEXT } from '@constant/auth'
 
+type RequestFuncOptional<T, U> = (data?: T) => Promise<[null, ErrorCustom<Response>] | [U, null]>
 type RequestFunc<T, U> = (data: T) => Promise<[null, ErrorCustom<Response>] | [U, null]>
 
-export const signIn: RequestFunc<TSignInData, TTokens> = async body => {
+type TLogInResponse = TUser & TTokens
+
+export const logIn: RequestFunc<TLogInData, TTokens> = async body => {
     try {
-        const signInRequest = await fetch(SIGN_IN_ENDPOINT, {
+        const logInRequest = await fetch(LOG_IN_ENDPOINT, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -16,13 +25,20 @@ export const signIn: RequestFunc<TSignInData, TTokens> = async body => {
             },
         })
 
-        if (!signInRequest.ok) {
+        if (!logInRequest.ok) {
             throw new Error('Cant sign in, check entered data or join', {
-                cause: signInRequest,
+                cause: logInRequest,
             })
         }
 
-        return [await signInRequest.json(), null]
+        const data = (await logInRequest.json()) as TLogInResponse
+
+        // NOTE: fake api only
+        data.accessToken = data.token || ''
+
+        const tokens: TTokens = { accessToken: data.accessToken, refreshToken: data.refreshToken }
+
+        return [tokens, null]
     } catch (err: any) {
         return [null, err]
     }
@@ -44,7 +60,9 @@ export const join: RequestFunc<TJoinData, any> = async body => {
             })
         }
 
-        return [await joinRequest.json(), null]
+        const response = await joinRequest.json()
+
+        return [response, null]
     } catch (err: any) {
         return [null, err]
     }
@@ -54,7 +72,7 @@ export const getUser: RequestFunc<string | undefined, TUser> = async token => {
     if (!token) return [null, new Error('token is not provided')]
 
     try {
-        const userRequest = await fetch(GET_USER_DATA_ENDPOINT, {
+        const userRequest = await fetch(GET_USER_ENDPOINT, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -66,16 +84,40 @@ export const getUser: RequestFunc<string | undefined, TUser> = async token => {
             })
         }
 
-        return [await userRequest.json(), null]
+        const response = await userRequest.json()
+
+        return [response, null]
     } catch (err: any) {
         return [null, err]
     }
 }
 
-export const refreshToken: RequestFunc<string | undefined, TTokens> = async refreshToken => {
+export const getAllUsers: RequestFuncOptional<string, TUser[]> = async (filters) => {
+    try {
+        const endpoint = filters ? `${GET_ALL_USERS_ENDPOINT}/filter?${filters}` : GET_ALL_USERS_ENDPOINT
+       
+        const usersRequest = await fetch(endpoint)
+
+        if (!usersRequest.ok) {
+            throw new Error("Can't get users, try to refresh token", {
+                cause: usersRequest,
+            })
+        }
+
+        const { users } = await usersRequest.json()
+
+        return [users, null]
+    } catch (err: any) {
+        return [null, err]
+    }
+}
+
+export const refreshTokens: RequestFunc<string | undefined, TTokens> = async refreshToken => {
     if (!refreshToken) return [null, new Error('token is not provided')]
 
     try {
+        console.log('refreshing');
+        
         const tokenRequest = await fetch(REFRESH_TOKEN_ENDPOINT, {
             method: 'POST',
             body: JSON.stringify({
@@ -87,19 +129,22 @@ export const refreshToken: RequestFunc<string | undefined, TTokens> = async refr
         })
 
         if (!tokenRequest.ok) {
+            console.log('err');
             throw new Error("Can't refresh token, pleas sign in again", {
                 cause: tokenRequest,
             })
         }
 
-        return [await tokenRequest.json(), null]
+        const response = await tokenRequest.json()
+
+        return [response, null]
     } catch (err: any) {
         return [null, err]
     }
 }
 
 export const getUserWithRefresh: RequestFunc<TTokens, TUser> = async tokens => {
-    const [user, userErr] = await getUser(tokens.access_token)
+    const [user, userErr] = await getUser(tokens.accessToken)
 
     if (userErr) {
         if (
@@ -107,11 +152,14 @@ export const getUserWithRefresh: RequestFunc<TTokens, TUser> = async tokens => {
             userErr.cause.status === TOKEN_EXPIRED_CODE &&
             userErr.cause.statusText === TOKEN_EXPIRED_TEXT
         ) {
-            const [updatedTokens, tokenErr] = await refreshToken(tokens.refresh_token)
+            const [updatedTokens, tokenErr] = await refreshTokens(tokens.refreshToken)
 
             if (tokenErr) return [null, tokenErr]
 
-            const [user, err] = await getUser(updatedTokens.access_token)
+            // NOTE: fake api only
+            updatedTokens.accessToken = updatedTokens.token || ''
+
+            const [user, err] = await getUser(updatedTokens.accessToken)
 
             if (err) return [null, err]
 
