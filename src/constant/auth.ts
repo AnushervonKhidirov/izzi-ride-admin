@@ -1,5 +1,20 @@
+import {
+    PROFILE_PAGE,
+    ADMINS_PAGE,
+    CLIENTS_PAGE,
+    TRIP_PAGE,
+    APP_MANAGEMENT_PAGE,
+    APP_VERSION_PAGE,
+    SUPPORT_PAGE,
+} from './links'
+
 export const ACCESS_TOKEN = 'access_token'
 export const REFRESH_TOKEN = 'refresh_token'
 
 export const TOKEN_EXPIRED_CODE = 401 // 64
 export const TOKEN_EXPIRED_TEXT = 'Unauthorized' // 'token expires'
+
+export const USER_ACCESSED_PAGES = {
+    admin: [PROFILE_PAGE, ADMINS_PAGE, CLIENTS_PAGE, TRIP_PAGE, APP_MANAGEMENT_PAGE, APP_VERSION_PAGE, SUPPORT_PAGE],
+    marketer: [PROFILE_PAGE, CLIENTS_PAGE, TRIP_PAGE, APP_MANAGEMENT_PAGE, APP_VERSION_PAGE, SUPPORT_PAGE],
+}

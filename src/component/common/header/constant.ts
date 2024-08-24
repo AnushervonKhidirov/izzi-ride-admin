@@ -1,14 +1,37 @@
 import { TNavigationData } from '@type/navigation'
 
-import { DASHBOARD_PAGE, MONITORING_PAGE } from '@constant/links'
+import {
+    ADMINS_PAGE,
+    CLIENTS_PAGE,
+    TRIP_PAGE,
+    APP_MANAGEMENT_PAGE,
+    APP_VERSION_PAGE,
+    SUPPORT_PAGE,
+} from '@constant/links'
 
 export const navigation: TNavigationData[] = [
     {
-        href: DASHBOARD_PAGE,
-        title: 'Dashboard',
+        href: ADMINS_PAGE,
+        title: 'Admins',
     },
     {
-        href: MONITORING_PAGE,
-        title: 'Monitoring',
+        href: CLIENTS_PAGE,
+        title: 'Clients',
+    },
+    {
+        href: TRIP_PAGE,
+        title: 'Trip',
+    },
+    {
+        href: APP_MANAGEMENT_PAGE,
+        title: 'App management',
+    },
+    {
+        href: APP_VERSION_PAGE,
+        title: 'App version',
+    },
+    {
+        href: SUPPORT_PAGE,
+        title: 'Support',
     },
 ]

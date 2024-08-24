@@ -1,4 +1,5 @@
 'use client'
+import type { FormEvent } from 'react'
 import type { TSignInData } from '@type/auth'
 
 import { useState } from 'react'
@@ -11,7 +12,6 @@ import { signInInputs } from '@constant/form'
 
 import { signIn } from '@api/auth-api'
 import { addCookies } from '@helper/cookies'
-import { FormEvent } from 'react'
 
 const LogIn = () => {
     const [loading, setLoading] = useState(false)
@@ -33,8 +33,6 @@ const LogIn = () => {
             alert(err)
         } else {
             addCookies(user)
-
-            // TODO: redirect back to previous page
             router.push('/')
         }
     }

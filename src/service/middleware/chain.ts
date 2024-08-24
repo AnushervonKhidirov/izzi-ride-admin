@@ -13,5 +13,11 @@ export function middlewareChain(middlewares: TMiddlewareFactory[], index = 0): N
         return curMiddleware(nextMiddleware)
     }
 
-    return () => NextResponse.next()
+    return request => {
+        const headers = new Headers(request.headers)
+
+        return NextResponse.next({
+            request: { headers },
+        })
+    }
 }

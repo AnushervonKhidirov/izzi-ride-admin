@@ -1,27 +1,31 @@
 import type { NextMiddleware } from 'next/server'
+import type { TUser } from '@type/auth'
 
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@constant/auth'
-import { SIGN_IN_PAGE, JOIN_PAGE, DASHBOARD_PAGE } from '@constant/links'
+import { SIGN_IN_PAGE, JOIN_PAGE } from '@constant/links'
+import { USER_ACCESSED_PAGES } from '@constant/auth'
+import { USER_HEADER } from '@constant/headers'
 
 export function protectedRoute(middleware: NextMiddleware): NextMiddleware {
     return async (request, event) => {
         const pathname = request.nextUrl.pathname
-        const cookieStore = cookies()
+        const userJson = request.headers.get(USER_HEADER)
 
         const unAuthPage = pathname === SIGN_IN_PAGE || pathname === JOIN_PAGE
-        const accessToken = cookieStore.get(ACCESS_TOKEN)?.value
-        const refreshToken = cookieStore.get(REFRESH_TOKEN)?.value
+        const rootPage = pathname === '/'
+        const user = userJson ? (JSON.parse(userJson) as TUser) : null
 
-        if (!unAuthPage && (!accessToken || !refreshToken)) {
-            return NextResponse.redirect(new URL(SIGN_IN_PAGE, request.nextUrl))
+        if (!unAuthPage && !user) {
+            return NextResponse.redirect(new URL(SIGN_IN_PAGE, request.url))
         }
 
-        if (unAuthPage && accessToken && refreshToken) {
-            // TODO: redirect back to previous page
-            return NextResponse.redirect(new URL(DASHBOARD_PAGE, request.nextUrl))
+        if (user) {
+            const accessedPages = USER_ACCESSED_PAGES[user.role]
+
+            if (accessedPages.indexOf(pathname) === -1) {
+                return NextResponse.redirect(new URL(accessedPages[0], request.url))
+            }
         }
 
         return middleware(request, event)
