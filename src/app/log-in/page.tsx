@@ -1,6 +1,6 @@
 'use client'
 import type { FormEvent } from 'react'
-import type { TSignInData } from '@type/auth'
+import type { TLogInData } from '@type/auth'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -8,9 +8,9 @@ import Link from 'next/link'
 import Form from '@common/form/form'
 
 import { JOIN_PAGE } from '@constant/links'
-import { signInInputs } from '@constant/form'
+import { logInInputs } from '@constant/form'
 
-import { signIn } from '@api/auth-api'
+import { logIn } from '@api/auth-api'
 import { addCookies } from '@helper/cookies'
 
 const LogIn = () => {
@@ -23,9 +23,9 @@ const LogIn = () => {
         setLoading(true)
 
         const formData = new FormData(e.currentTarget)
-        const body = Object.fromEntries(formData) as TSignInData
+        const body = Object.fromEntries(formData) as TLogInData
 
-        const [user, err] = await signIn(body)
+        const [user, err] = await logIn(body)
 
         setLoading(false)
 
@@ -38,11 +38,11 @@ const LogIn = () => {
     }
 
     return (
-        <main id='sign-in-page'>
+        <main id='log-in-page'>
             <div className='form_overlay'>
-                <h1>Sign In</h1>
+                <h1>Log In</h1>
 
-                <Form submitFunc={submitFunc} inputs={signInInputs} loading={loading} buttonText='Sign in'>
+                <Form submitFunc={submitFunc} inputs={logInInputs} loading={loading} buttonText='Log in'>
                     Don't have account? <Link href={JOIN_PAGE} title='Request to join'>Request to join</Link>
                 </Form>
             </div>

@@ -22,13 +22,14 @@ body {
 
 main {
     grid-area: main;
+    padding: 2em;
 }
 
 header {
     grid-area: header;
 }
 
-main#sign-in-page,
+main#log-in-page,
 main#join-page {
     display: grid;
     grid-area: auto;
@@ -36,8 +37,7 @@ main#join-page {
     align-items: center;
 }
 
-
-main#sign-in-page .form_overlay,
+main#log-in-page .form_overlay,
 main#join-page .form_overlay {
     display: grid;
     width: 24em;
@@ -52,11 +52,8 @@ a {
     text-decoration: none;
 }
 
-
-
 /* desktop */
 @media screen and (min-width: 1024px) {
-
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -78,7 +75,6 @@ a {
         font-size: 1.75vw;
     }
 }
-
 
 /* mobile */
 @media screen and (max-width: 425px) {
