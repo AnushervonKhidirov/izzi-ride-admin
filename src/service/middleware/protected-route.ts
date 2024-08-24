@@ -13,7 +13,6 @@ export function protectedRoute(middleware: NextMiddleware): NextMiddleware {
         const userJson = request.headers.get(USER_HEADER)
 
         const unAuthPage = pathname === SIGN_IN_PAGE || pathname === JOIN_PAGE
-        const rootPage = pathname === '/'
         const user = userJson ? (JSON.parse(userJson) as TUser) : null
 
         if (!unAuthPage && !user) {
