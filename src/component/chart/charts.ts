@@ -4,5 +4,6 @@ const AreaChart = dynamic(() => import('@chart/area-chart/area-chart'), { ssr: f
 const LineFillChart = dynamic(() => import('@chart/line-fill-chart/line-fill-chart'), { ssr: false })
 const LineChart = dynamic(() => import('@chart/line-chart/line-chart'), { ssr: false })
 const PieChart = dynamic(() => import('@chart/pie-chart/pie-chart'), { ssr: false })
+const Table = dynamic(() => import('@chart/table/table'), { ssr: false })
 
-export { AreaChart, LineChart, LineFillChart, PieChart }
+export { AreaChart, LineChart, LineFillChart, PieChart, Table }
