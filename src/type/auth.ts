@@ -9,7 +9,7 @@ export type TUser = {
     role: TUserRole
 }
 
-export type TUserRole = 'admin' | 'marketer'
+export type TUserRole = 'admin' | 'user'
 export type TGender = 'male' | 'female'
 
 export type TTokens = {

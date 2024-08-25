@@ -7,6 +7,7 @@ import {
     REFRESH_TOKEN_ENDPOINT,
     LOG_IN_ENDPOINT,
     GET_ALL_USERS_ENDPOINT,
+    GET_SINGLE_USER_ENDPOINT,
 } from '@constant/endpoint'
 import { TOKEN_EXPIRED_CODE, TOKEN_EXPIRED_TEXT } from '@constant/auth'
 
@@ -92,10 +93,28 @@ export const getUser: RequestFunc<string | undefined, TUser> = async token => {
     }
 }
 
-export const getAllUsers: RequestFuncOptional<string, TUser[]> = async (filters) => {
+export const getSingleUser: RequestFunc<number | string, TUser> = async id => {
+    try {
+        const userRequest = await fetch(GET_SINGLE_USER_ENDPOINT.replace('[id]', id.toString()))
+
+        if (!userRequest.ok) {
+            throw new Error("Can't get user, try again later", {
+                cause: userRequest,
+            })
+        }
+
+        const response = await userRequest.json()
+
+        return [response, null]
+    } catch (err: any) {
+        return [null, err]
+    }
+}
+
+export const getAllUsers: RequestFuncOptional<string, TUser[]> = async filters => {
     try {
         const endpoint = filters ? `${GET_ALL_USERS_ENDPOINT}/filter?${filters}` : GET_ALL_USERS_ENDPOINT
-       
+
         const usersRequest = await fetch(endpoint)
 
         if (!usersRequest.ok) {
@@ -116,8 +135,6 @@ export const refreshTokens: RequestFunc<string | undefined, TTokens> = async ref
     if (!refreshToken) return [null, new Error('token is not provided')]
 
     try {
-        console.log('refreshing');
-        
         const tokenRequest = await fetch(REFRESH_TOKEN_ENDPOINT, {
             method: 'POST',
             body: JSON.stringify({
@@ -129,7 +146,6 @@ export const refreshTokens: RequestFunc<string | undefined, TTokens> = async ref
         })
 
         if (!tokenRequest.ok) {
-            console.log('err');
             throw new Error("Can't refresh token, pleas sign in again", {
                 cause: tokenRequest,
             })

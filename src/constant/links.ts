@@ -6,6 +6,7 @@ export const APP_VERSION_PAGE = '/app-version'
 export const SUPPORT_PAGE = '/support'
 
 export const PROFILE_PAGE = '/profile'
+export const PROFILE_PAGE_ID = '/profile/[id]'
 
 export const LOG_IN_PAGE = '/log-in'
 export const JOIN_PAGE = '/join'

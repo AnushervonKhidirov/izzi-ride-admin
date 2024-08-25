@@ -1,5 +1,6 @@
 export const LOG_IN_ENDPOINT = 'https://dummyjson.com/auth/logIn'
 export const JOIN_ENDPOINT = ''
 export const GET_USER_ENDPOINT = 'https://dummyjson.com/auth/me'
+export const GET_SINGLE_USER_ENDPOINT = 'https://dummyjson.com/users/[id]'
 export const GET_ALL_USERS_ENDPOINT = 'https://dummyjson.com/users'
 export const REFRESH_TOKEN_ENDPOINT = 'https://dummyjson.com/auth/refresh'
