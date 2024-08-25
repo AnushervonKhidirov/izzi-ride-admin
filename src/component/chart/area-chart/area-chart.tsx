@@ -10,11 +10,11 @@ const Chart: FC<TChart> = ({ data, xAxis, yAxis }) => {
     return (
         <ResponsiveContainer>
             <AreaChart data={data}>
-                <CartesianGrid strokeDasharray='0 0' />
+                <CartesianGrid strokeDasharray="0 0" />
                 <XAxis dataKey={xAxis} />
                 <YAxis />
                 <Tooltip />
-                <Area type='monotone' dataKey={yAxis} stroke='none' fill={COLORS.primary} />
+                <Area type="monotone" dataKey={yAxis} stroke="none" fill={COLORS.primary} />
             </AreaChart>
         </ResponsiveContainer>
     )

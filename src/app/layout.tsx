@@ -17,7 +17,7 @@ export const roboto = Roboto({
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
-        <html lang='en'>
+        <html lang="en">
             <body className={roboto.className}>
                 {children}
             </body>

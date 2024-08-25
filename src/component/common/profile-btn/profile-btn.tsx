@@ -16,7 +16,7 @@ const ProfileButton: FC = () => {
 
     return (
         user && (
-            <Link href={PROFILE_PAGE} title='Profile' className={styles.profile_btn}>
+            <Link href={PROFILE_PAGE} title="Profile" className={styles.profile_btn}>
                 <AccountCircle
                     className={styles.profile_icon}
                     style={{ width: '100%', height: '100%', fill: COLORS.secondary }}

@@ -9,11 +9,11 @@ const Chart: FC<TChart> = ({ data, xAxis, yAxis }) => {
     return (
         <ResponsiveContainer>
             <AreaChart data={data}>
-                <CartesianGrid strokeDasharray='0 0' />
+                <CartesianGrid strokeDasharray="0 0" />
                 <XAxis dataKey={xAxis} />
                 <YAxis />
                 <Tooltip />
-                <Area type='linear' dataKey={yAxis} stroke={COLORS.primary} strokeWidth={3} fill={COLORS.primaryTransparency(0.25)} />
+                <Area type="linear" dataKey={yAxis} stroke={COLORS.primary} strokeWidth={3} fill={COLORS.primaryTransparency(0.25)} />
             </AreaChart>
         </ResponsiveContainer>
     )

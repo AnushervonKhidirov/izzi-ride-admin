@@ -6,6 +6,7 @@ import { Button } from '@mui/material'
 import { Table } from '@chart/charts'
 import { getAllUsers } from '@api/auth-api'
 import { PROFILE_PAGE } from '@constant/links'
+
 import styles from './admin.module.css'
 
 const Admins = async () => {
@@ -28,8 +29,8 @@ const Admins = async () => {
             link: (
                 <Button
                     href={`${PROFILE_PAGE}/${user.id}`}
-                    target='_blank'
-                    variant='contained'
+                    target="_blank"
+                    variant="contained"
                     className={styles.edit_btn}
                 >
                     Edit

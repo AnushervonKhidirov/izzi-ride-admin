@@ -40,11 +40,11 @@ const Field: FC<TextFieldProps> = ({ name, type, label, required }) => {
 
     return (
         <FormControl>
-            <InputLabel size='small' htmlFor={name} style={{ fontSize: '1em' }}>
+            <InputLabel size="small" htmlFor={name} style={{ fontSize: '1em' }}>
                 {required ? `${label} *` : label}
             </InputLabel>
             <Input
-                size='small'
+                size="small"
                 id={name}
                 name={name}
                 type={type}

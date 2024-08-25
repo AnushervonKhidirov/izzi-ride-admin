@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { FC, MouseEvent } from 'react'
 import type { OutlinedInputProps } from '@mui/material'
 
 import { useState } from 'react'
@@ -10,7 +10,7 @@ export const PasswordInput: FC<OutlinedInputProps> = ({ size, name, label, requi
 
     const handleClickShowPassword = () => setShowPassword(show => !show)
 
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
     }
 
@@ -23,15 +23,19 @@ export const PasswordInput: FC<OutlinedInputProps> = ({ size, name, label, requi
             size={size}
             style={style}
             endAdornment={
-                <InputAdornment position='end'>
+                <InputAdornment position="end">
                     <IconButton
-                        aria-label='toggle password visibility'
+                        aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
-                        edge='end'
+                        edge="end"
                         style={{ fontSize: '1.5em' }}
                     >
-                        {showPassword ? <VisibilityOff fontSize={size} style={{ fontSize: '1em' }} /> : <Visibility fontSize={size} style={{ fontSize: '1em' }} />}
+                        {showPassword ? (
+                            <VisibilityOff fontSize={size} style={{ fontSize: '1em' }} />
+                        ) : (
+                            <Visibility fontSize={size} style={{ fontSize: '1em' }} />
+                        )}
                     </IconButton>
                 </InputAdornment>
             }

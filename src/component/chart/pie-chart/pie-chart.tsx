@@ -46,7 +46,7 @@ const Chart = ({ data }: { data: TPieChartData[] }) => {
                 },
             ]}
             slotProps={{
-                legend: {hidden: true}
+                legend: {hidden: true},
             }}
             {...pieParams}
         ></PieChart>

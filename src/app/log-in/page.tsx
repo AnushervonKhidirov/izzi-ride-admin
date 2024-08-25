@@ -38,12 +38,15 @@ const LogIn = () => {
     }
 
     return (
-        <main id='log-in-page'>
-            <div className='form_overlay'>
+        <main id="log-in-page">
+            <div className="form_overlay">
                 <h1>Log In</h1>
 
-                <Form submitFunc={submitFunc} inputs={logInInputs} loading={loading} buttonText='Log in'>
-                    Don't have account? <Link href={JOIN_PAGE} title='Request to join'>Request to join</Link>
+                <Form submitFunc={submitFunc} inputs={logInInputs} loading={loading} buttonText="Log in">
+                    Don't have account?{' '}
+                    <Link href={JOIN_PAGE} title="Request to join">
+                        Request to join
+                    </Link>
                 </Form>
             </div>
         </main>

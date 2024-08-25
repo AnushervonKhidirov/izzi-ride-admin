@@ -46,7 +46,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer>
-                <Table stickyHeader aria-label='sticky table'>
+                <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             {columns.map(column => (
@@ -59,7 +59,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
                     <TableBody>
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
                             return (
-                                <TableRow hover role='checkbox' tabIndex={-1} key={row.id}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                     {columns.map(column => {
                                         const value = row[column.id] ? row[column.id] : '-'
 
@@ -80,7 +80,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
-                component='div'
+                component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
