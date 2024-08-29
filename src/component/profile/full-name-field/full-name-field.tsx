@@ -1,26 +1,22 @@
 'use client'
 import type { FC, MouseEvent } from 'react'
+import type { TFullName } from '@type/profile'
 
 import { useRef, useState } from 'react'
 
-import { Input, InputAdornment, IconButton } from '@mui/material'
+import { Input, InputAdornment, Tooltip, IconButton } from '@mui/material'
 import { Edit, Save } from '@mui/icons-material'
 import { COLORS } from '@constant/colors'
 
-type TFullName = {
-    firstName: string
-    lastName: string
-}
-
-export const FullName: FC<TFullName> = ({ firstName, lastName }) => {
+const FullName: FC<TFullName> = ({ firstName, lastName }) => {
     const [fullName, setFullName] = useState(`${firstName} ${lastName}`)
-    const [editable, setEditable] = useState(false)
+    const [editing, setEditing] = useState(false)
     const [saved, setSaved] = useState(false)
     const inputRef = useRef<HTMLDivElement>(null)
 
     function editUserName() {
         fucusOnInput()
-        setEditable(true)
+        setEditing(true)
     }
 
     function saveUserName() {
@@ -36,7 +32,7 @@ export const FullName: FC<TFullName> = ({ firstName, lastName }) => {
 
     function blurHandler() {
         if (!saved) setFullName(`${firstName} ${lastName}`)
-        setEditable(false)
+        setEditing(false)
     }
 
     return (
@@ -44,30 +40,54 @@ export const FullName: FC<TFullName> = ({ firstName, lastName }) => {
             value={fullName}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFullName(event.target.value)}
             ref={inputRef}
-            readOnly={!editable}
-            disableUnderline
+            readOnly={!editing}
+            disableUnderline={!editing}
             onBlur={blurHandler}
-            style={{ color: COLORS.secondary, fontSize: '2.5em', fontWeight: 700, gridArea: 'full_name' }}
+            style={{
+                color: COLORS.secondary,
+                fontSize: '2.5em',
+                fontWeight: 700,
+                gridArea: 'full_name',
+                justifySelf: 'start',
+            }}
             sx={{ '& > input': { padding: 0 } }}
             endAdornment={
                 <InputAdornment position="end">
-                    <IconButton
-                        aria-label="edit full name"
-                        onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
-                            event.preventDefault()
-                        }}
-                        edge="end"
-                        style={{ fontSize: '1.5em' }}
-                        size="small"
-                    >
-                        {editable ? (
-                            <Save style={{ fontSize: '0.5em', fill: COLORS.primary }} onClick={saveUserName} />
-                        ) : (
-                            <Edit style={{ fontSize: '0.5em' }} onClick={editUserName} />
-                        )}
-                    </IconButton>
+                    {editing ? (
+                        <Tooltip title="Save full name">
+                            <IconButton
+                                aria-label="Save full name"
+                                onClick={saveUserName}
+                                onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
+                                    event.preventDefault()
+                                }}
+                                edge="end"
+                                style={{ fontSize: '1.5em' }}
+                                size="small"
+                            >
+                                <Save style={{ fontSize: '0.5em', fill: COLORS.primary }} />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="Save full name">
+                            <IconButton
+                                aria-label="Edit full name"
+                                onClick={editUserName}
+                                onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
+                                    event.preventDefault()
+                                }}
+                                edge="end"
+                                style={{ fontSize: '1.5em' }}
+                                size="small"
+                            >
+                                <Edit style={{ fontSize: '0.5em' }} />
+                            </IconButton>
+                        </Tooltip>
+                    )}
                 </InputAdornment>
             }
         />
     )
 }
+
+export default FullName

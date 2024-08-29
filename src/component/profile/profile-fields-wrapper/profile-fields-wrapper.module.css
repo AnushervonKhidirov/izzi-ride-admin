@@ -1,0 +1,19 @@
+.profile_fields_wrapper {
+    display: grid;
+    gap: 0.75em;
+}
+
+.fields_wrapper_name {
+    font-size: 1.5em;
+    font-weight: 500;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 0.25em;
+}
+
+.fields_list {
+    font-size: 1.25em;
+    display: grid;
+    gap: 0.15em;
+}
