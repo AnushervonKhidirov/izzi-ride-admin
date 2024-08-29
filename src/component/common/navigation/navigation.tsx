@@ -25,7 +25,6 @@ const Navigation: FC<TNavigation> = ({ data, visibleRoutes, className }) => {
                     visibleRoutes.indexOf(href) !== -1 && (
                         <Link
                             href={href}
-                            title={title}
                             key={`header-nav-${title}`}
                             className={classNames(styles.navigation_item, { [styles.active]: pathname === href })}
                         >
