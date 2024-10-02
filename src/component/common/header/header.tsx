@@ -17,7 +17,7 @@ const Header = () => {
     return (
         user && (
             <header className={styles.header}>
-                <ProfileButton />
+                <ProfileButton { ...user } />
                 <Navigation data={navigation} visibleRoutes={USER_ACCESSED_PAGES[user.role]} />
             </header>
         )

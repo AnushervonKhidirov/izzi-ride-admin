@@ -4,7 +4,7 @@ import { isProfilePageWithId, pageId } from '@constant/regex'
 import { getSingleUser } from '@api/auth-api'
 import { PROFILE_HEADER } from '@constant/headers'
 
-export function profilesMiddleware(middleware: NextMiddleware): NextMiddleware {
+export function profilesMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
     return async (request, event) => {
         const pathname = request.nextUrl.pathname
 
@@ -24,6 +24,6 @@ export function profilesMiddleware(middleware: NextMiddleware): NextMiddleware {
             }
         }
 
-        return middleware(request, event)
+        return nextMiddleware(request, event)
     }
 }

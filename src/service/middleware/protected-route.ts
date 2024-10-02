@@ -8,7 +8,7 @@ import { USER_ACCESSED_PAGES } from '@constant/auth'
 import { USER_HEADER } from '@constant/headers'
 import { isPageWithId, pageId } from '@constant/regex'
 
-export function protectedRouteMiddleware(middleware: NextMiddleware): NextMiddleware {
+export function protectedRouteMiddleware(nextMiddleware: NextMiddleware): NextMiddleware {
     return async (request, event) => {
         const pathname = request.nextUrl.pathname
         const userJson = request.headers.get(USER_HEADER)
@@ -29,6 +29,6 @@ export function protectedRouteMiddleware(middleware: NextMiddleware): NextMiddle
             }
         }
 
-        return middleware(request, event)
+        return nextMiddleware(request, event)
     }
 }
