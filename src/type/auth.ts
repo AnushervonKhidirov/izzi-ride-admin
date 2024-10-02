@@ -13,8 +13,6 @@ export type TUserRole = 'admin' | 'user'
 export type TGender = 'male' | 'female'
 
 export type TTokens = {
-    // NOTE: fake api only
-    token?: string
     accessToken: string
     refreshToken: string
 }

@@ -33,13 +33,9 @@ export const logIn: RequestFunc<TLogInData, TTokens> = async body => {
         }
 
         const data = (await logInRequest.json()) as TLogInResponse
+        const { accessToken, refreshToken }: TTokens = data
 
-        // NOTE: fake api only
-        data.accessToken = data.token || ''
-
-        const tokens: TTokens = { accessToken: data.accessToken, refreshToken: data.refreshToken }
-
-        return [tokens, null]
+        return [{ accessToken, refreshToken }, null]
     } catch (err: any) {
         return [null, err]
     }
@@ -80,7 +76,7 @@ export const getUser: RequestFunc<string | undefined, TUser> = async token => {
         })
 
         if (!userRequest.ok) {
-            throw new Error('Can\'t get user, try to refresh token', {
+            throw new Error("Can't get user, try to refresh token", {
                 cause: userRequest,
             })
         }
@@ -98,7 +94,7 @@ export const getSingleUser: RequestFunc<number | string, TUser> = async id => {
         const userRequest = await fetch(GET_SINGLE_USER_ENDPOINT.replace('[id]', id.toString()))
 
         if (!userRequest.ok) {
-            throw new Error('Can\'t get user, try again later', {
+            throw new Error("Can't get user, try again later", {
                 cause: userRequest,
             })
         }
@@ -118,7 +114,7 @@ export const getAllUsers: RequestFuncOptional<string, TUser[]> = async filters =
         const usersRequest = await fetch(endpoint)
 
         if (!usersRequest.ok) {
-            throw new Error('Can\'t get users, try to refresh token', {
+            throw new Error("Can't get users, try to refresh token", {
                 cause: usersRequest,
             })
         }
@@ -146,7 +142,7 @@ export const refreshTokens: RequestFunc<string | undefined, TTokens> = async ref
         })
 
         if (!tokenRequest.ok) {
-            throw new Error('Can\'t refresh token, pleas sign in again', {
+            throw new Error("Can't refresh token, pleas sign in again", {
                 cause: tokenRequest,
             })
         }
@@ -171,9 +167,6 @@ export const getUserWithRefresh: RequestFunc<TTokens, TUser> = async tokens => {
             const [updatedTokens, tokenErr] = await refreshTokens(tokens.refreshToken)
 
             if (tokenErr) return [null, tokenErr]
-
-            // NOTE: fake api only
-            updatedTokens.accessToken = updatedTokens.token || ''
 
             const [user, err] = await getUser(updatedTokens.accessToken)
 
