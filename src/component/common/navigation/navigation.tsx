@@ -4,35 +4,38 @@ import type { TNavigationData } from '@type/navigation'
 
 import { usePathname } from 'next/navigation'
 
-import Link from 'next/link'
+import { List, ListItemButton } from '@mui/material'
+
 import classNames from 'classnames'
 
 import styles from './navigation.module.css'
 
 type TNavigation = {
     data: TNavigationData[]
-    visibleRoutes: string[]
+    routes: string[]
     className?: string
 }
 
-const Navigation: FC<TNavigation> = ({ data, visibleRoutes, className }) => {
+const Navigation: FC<TNavigation> = ({ data, routes, className }) => {
     const pathname = usePathname()
 
     return (
-        <nav className={classNames(styles.navigation, className)}>
+        <List sx={{ padding: 0 }} className={classNames(styles.navigation, className)}>
             {data.map(
                 ({ href, title }) =>
-                    visibleRoutes.indexOf(href) !== -1 && (
-                        <Link
-                            href={href}
+                    routes.indexOf(href) !== -1 && (
+                        <ListItemButton 
+                            LinkComponent={'a'}
                             key={`header-nav-${title}`}
+                            href={href}
+                            sx={{ borderRadius: '0.25em' }}
                             className={classNames(styles.navigation_item, { [styles.active]: pathname === href })}
                         >
                             {title}
-                        </Link>
+                        </ListItemButton>
                     ),
             )}
-        </nav>
+        </List>
     )
 }
 

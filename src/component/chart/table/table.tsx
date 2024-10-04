@@ -50,7 +50,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
                     <TableHead>
                         <TableRow>
                             {columns.map(column => (
-                                <HeaderCell key={column.id} align={column.align}>
+                                <HeaderCell key={column.id} align={column.align} sx={{ fontSize: '1em' }}>
                                     {column.label}
                                 </HeaderCell>
                             ))}
@@ -67,6 +67,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
                                             <TableCell
                                                 key={`${row.id}-${column.id}`}
                                                 align={value === '-' ? 'center' : column.align}
+                                                sx={{ fontSize: '0.8em' }}
                                             >
                                                 {value}
                                             </TableCell>
