@@ -4,6 +4,7 @@
     grid-auto-rows: max-content;
     grid-template-areas: 'title value';
     align-items: baseline;
+    gap: 0.5em;
 }
 
 .title {

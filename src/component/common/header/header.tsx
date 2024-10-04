@@ -19,14 +19,9 @@ const Header = () => {
     return (
         user && (
             <header className={styles.header}>
-<<<<<<< HEAD
                 <ProfileButton { ...user } />
-                <Navigation data={navigation} visibleRoutes={USER_ACCESSED_PAGES[user.role]} />
-=======
-                <ProfileButton className={styles.profile_btn} />
                 <Navigation className={styles.navigation} data={navigation} routes={USER_ACCESSED_PAGES[user.role]} />
                 <HamburgerMenu className={styles.hamburger_menu} />
->>>>>>> 74e5768 (some styles changed)
             </header>
         )
     )
