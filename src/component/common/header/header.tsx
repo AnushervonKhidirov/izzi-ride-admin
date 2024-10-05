@@ -21,7 +21,7 @@ const Header = () => {
             <header className={styles.header}>
                 <ProfileButton { ...user } />
                 <Navigation className={styles.navigation} data={navigation} routes={USER_ACCESSED_PAGES[user.role]} />
-                <HamburgerMenu className={styles.hamburger_menu} />
+                {/* <HamburgerMenu className={styles.hamburger_menu} /> */}
             </header>
         )
     )
