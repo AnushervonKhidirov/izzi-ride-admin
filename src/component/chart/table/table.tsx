@@ -50,7 +50,11 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
                     <TableHead>
                         <TableRow>
                             {columns.map(column => (
-                                <HeaderCell key={column.id} align={column.align} sx={{ fontSize: '1em' }}>
+                                <HeaderCell
+                                    key={column.id}
+                                    align={column.align}
+                                    sx={{ fontSize: '1em', fontFamily: 'inherit' }}
+                                >
                                     {column.label}
                                 </HeaderCell>
                             ))}
@@ -67,7 +71,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
                                             <TableCell
                                                 key={`${row.id}-${column.id}`}
                                                 align={value === '-' ? 'center' : column.align}
-                                                sx={{ fontSize: '0.8em' }}
+                                                sx={{ fontSize: '0.8em', fontFamily: 'inherit' }}
                                             >
                                                 {value}
                                             </TableCell>
@@ -83,6 +87,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
                 rowsPerPageOptions={[5, 10, 15]}
                 component="div"
                 count={rows.length}
+                sx={{ fontFamily: 'inherit', '& *': { fontFamily: 'inherit !important' } }}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

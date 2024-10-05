@@ -32,6 +32,7 @@ const Admins = async () => {
                     target="_blank"
                     variant="contained"
                     className={styles.edit_btn}
+                    sx={{ fontFamily: 'inherit' }}
                 >
                     Edit
                 </Button>

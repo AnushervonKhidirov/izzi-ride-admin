@@ -24,6 +24,8 @@ const ProfileField: FC<TProfileField> = ({ title, value, editing, editable = tru
                     disableUnderline={!editing}
                     style={{
                         fontSize: '1em',
+                        fontFamily: 'inherit',
+                        fontWeight: 'inherit',
                     }}
                     sx={{ '& > input': { padding: 0 } }}
                 />

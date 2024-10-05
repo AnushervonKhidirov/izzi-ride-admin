@@ -47,6 +47,7 @@ const FullName: FC<TFullName> = ({ firstName, lastName }) => {
                 color: COLORS.secondary,
                 fontSize: '2.5em',
                 fontWeight: 700,
+                fontFamily: 'inherit',
                 gridArea: 'full_name',
                 justifySelf: 'start',
             }}
