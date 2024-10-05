@@ -17,7 +17,7 @@ type TProfileButton = TUser & {
 const ProfileButton: FC<TProfileButton> = ({ firstName, lastName, role, className }) => {
     return (
         <Tooltip title="Profile" followCursor>
-            <Link href={PROFILE_PAGE} title="Profile" className={classNames(styles.profile_btn, className)}>
+            <Link href={PROFILE_PAGE} className={classNames(styles.profile_btn, className)}>
                 <AccountCircle
                     className={styles.profile_icon}
                     style={{ width: '100%', height: '100%', fill: COLORS.secondary }}
