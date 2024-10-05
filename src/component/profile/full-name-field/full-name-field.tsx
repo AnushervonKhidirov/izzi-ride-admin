@@ -70,7 +70,7 @@ const FullName: FC<TFullName> = ({ firstName, lastName }) => {
                             </IconButton>
                         </Tooltip>
                     ) : (
-                        <Tooltip title="Save full name">
+                        <Tooltip title="Edit full name">
                             <IconButton
                                 aria-label="Edit full name"
                                 onClick={editUserName}

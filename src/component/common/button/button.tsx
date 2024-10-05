@@ -1,6 +1,7 @@
 import type { FC, HTMLAttributeAnchorTarget, PropsWithChildren } from 'react'
+import type { TooltipProps } from '@mui/material'
 
-import { CircularProgress, Button } from '@mui/material'
+import { CircularProgress, Button, Tooltip } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
 import classNames from 'classnames'
@@ -15,6 +16,7 @@ type TLinkBtn = PropsWithChildren & {
     title: string
     href: string
     target: HTMLAttributeAnchorTarget
+    tooltipPlacement?: TooltipProps['placement']
     className?: string
 }
 
@@ -38,17 +40,18 @@ export const FormBtn: FC<TFromBtn> = ({ loading, title }) => {
     )
 }
 
-export const LinkButton: FC<TLinkBtn> = ({ href, target, title, children }) => {
+export const LinkButton: FC<TLinkBtn> = ({ href, target, title, children, tooltipPlacement }) => {
     return (
-        <Button
-            title={title}
-            href={href}
-            target={target}
-            variant="contained"
-            className={classNames(styles.link_btn, classNames)}
-            sx={{ fontFamily: 'inherit' }}
-        >
-            {children}
-        </Button>
+        <Tooltip title={title} placement={tooltipPlacement}>
+            <Button
+                href={href}
+                target={target}
+                variant="contained"
+                className={classNames(styles.link_btn, classNames)}
+                sx={{ fontFamily: 'inherit' }}
+            >
+                {children}
+            </Button>
+        </Tooltip>
     )
 }

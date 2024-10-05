@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import type { TUser } from '@type/auth'
 
 import Link from 'next/link'
+import { Tooltip } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 
 import classNames from 'classnames'
@@ -15,16 +16,18 @@ type TProfileButton = TUser & {
 
 const ProfileButton: FC<TProfileButton> = ({ firstName, lastName, role, className }) => {
     return (
-        <Link href={PROFILE_PAGE} title="Profile" className={classNames(styles.profile_btn, className)}>
-            <AccountCircle
-                className={styles.profile_icon}
-                style={{ width: '100%', height: '100%', fill: COLORS.secondary }}
-            />
-            <div className={styles.user_name}>
-                {firstName} {lastName}
-            </div>
-            <div className={styles.user_role}>{role}</div>
-        </Link>
+        <Tooltip title="Profile" followCursor>
+            <Link href={PROFILE_PAGE} title="Profile" className={classNames(styles.profile_btn, className)}>
+                <AccountCircle
+                    className={styles.profile_icon}
+                    style={{ width: '100%', height: '100%', fill: COLORS.secondary }}
+                />
+                <div className={styles.user_name}>
+                    {firstName} {lastName}
+                </div>
+                <div className={styles.user_role}>{role}</div>
+            </Link>
+        </Tooltip>
     )
 }
 

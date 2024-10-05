@@ -21,7 +21,12 @@ const UserTable: FC<TUserTable> = ({ users }) => {
             ...user,
             name: `${user.firstName} ${user.lastName}`,
             link: (
-                <LinkButton title="Edit" href={`${PROFILE_PAGE}/${user.id}`} target="_blank">
+                <LinkButton
+                    title={`Edit ${user.firstName}'s profile`}
+                    href={`${PROFILE_PAGE}/${user.id}`}
+                    target="_blank"
+                    tooltipPlacement="left"
+                >
                     Edit
                 </LinkButton>
             ),
