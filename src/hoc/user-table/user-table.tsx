@@ -2,12 +2,10 @@ import type { FC, ReactNode } from 'react'
 import type { TUserTable } from '@type/chart'
 import type { TUser } from '@type/auth'
 
-import { Button } from '@mui/material'
-
 import { Table } from '@chart/charts'
-import { PROFILE_PAGE } from '@constant/links'
+import { LinkButton } from '@common/button/button'
 
-import styles from './user-table.module.css'
+import { PROFILE_PAGE } from '@constant/links'
 
 const UserTable: FC<TUserTable> = ({ users }) => {
     const columns = [
@@ -23,15 +21,9 @@ const UserTable: FC<TUserTable> = ({ users }) => {
             ...user,
             name: `${user.firstName} ${user.lastName}`,
             link: (
-                <Button
-                    href={`${PROFILE_PAGE}/${user.id}`}
-                    target="_blank"
-                    variant="contained"
-                    className={styles.edit_btn}
-                    sx={{ fontFamily: 'inherit' }}
-                >
+                <LinkButton title="Edit" href={`${PROFILE_PAGE}/${user.id}`} target="_blank">
                     Edit
-                </Button>
+                </LinkButton>
             ),
         }
     })
