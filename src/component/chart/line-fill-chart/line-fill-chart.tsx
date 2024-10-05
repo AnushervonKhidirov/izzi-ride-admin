@@ -13,7 +13,14 @@ const Chart: FC<TChart> = ({ data, xAxis, yAxis }) => {
                 <XAxis dataKey={xAxis} />
                 <YAxis />
                 <Tooltip />
-                <Area type="linear" dataKey={yAxis} stroke={COLORS.primary} strokeWidth={3} fill={COLORS.primaryTransparency(0.25)} />
+                <Area
+                    type="linear"
+                    dataKey={yAxis}
+                    stroke={COLORS.primary}
+                    strokeWidth={3}
+                    fill={COLORS.primary}
+                    fillOpacity={0.25}
+                />
             </AreaChart>
         </ResponsiveContainer>
     )
