@@ -6,9 +6,9 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 import { COLORS } from '@constant/colors'
 
-const Chart: FC<TChart> = ({ data, xAxis, yAxis }) => {
+const Chart: FC<TChart> = ({ data, xAxis, yAxis, width, height, className }) => {
     return (
-        <ResponsiveContainer>
+        <ResponsiveContainer width={width} height={height} className={className}>
             <AreaChart data={data}>
                 <CartesianGrid strokeDasharray="0 0" />
                 <XAxis dataKey={xAxis} />

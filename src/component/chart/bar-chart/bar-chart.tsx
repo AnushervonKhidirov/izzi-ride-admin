@@ -5,9 +5,9 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 
 import { COLORS } from '@constant/colors'
 
-const Chart: FC<TChart> = ({ data, xAxis, yAxis }) => {
+const Chart: FC<TChart> = ({ data, xAxis, yAxis, width, height, className }) => {
     return (
-        <ResponsiveContainer>
+        <ResponsiveContainer width={width} height={height} className={className}>
             <BarChart data={data}>
                 <CartesianGrid strokeDasharray="0 0" />
                 <XAxis dataKey={xAxis} />

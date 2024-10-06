@@ -1,4 +1,4 @@
-import { TUser } from './auth'
+import type { TUser } from './auth'
 
 export type TChartData = {
     title?: string
@@ -13,6 +13,9 @@ export type TChart = {
     data: any[]
     xAxis: string
     yAxis: string
+    width?: number,
+    height?: number,
+    className?: string
 }
 
 export type TUserTable = {
