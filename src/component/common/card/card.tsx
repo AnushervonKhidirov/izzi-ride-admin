@@ -8,7 +8,7 @@ type TCard = PropsWithChildren & {
 
 const Card: FC<TCard> = ({ children, className }) => {
     return (
-        <MuiCard className={className} sx={{ padding: '1em', backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
+        <MuiCard className={className} elevation={3} sx={{ padding: '1em', backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
             {children}
         </MuiCard>
     )

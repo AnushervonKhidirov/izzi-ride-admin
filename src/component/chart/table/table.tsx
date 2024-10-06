@@ -44,7 +44,7 @@ const CustomTable: FC<TTable> = ({ columns, rows }) => {
     }
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }} elevation={3}>
             <TableContainer>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
