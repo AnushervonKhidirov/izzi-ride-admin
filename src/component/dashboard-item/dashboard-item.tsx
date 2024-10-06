@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import Card from '../common/card/card'
+import Card from '@common/card/card'
 
 import dateToText from '@helper/date-to-text'
 import styles from './dashboard-item.module.css'

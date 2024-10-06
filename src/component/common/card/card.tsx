@@ -1,17 +1,17 @@
-import type { FC } from 'react'
-import { ReactNode } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
-import classNames from 'classnames'
+import { Card as MuiCard } from '@mui/material'
 
-import styles from './card.module.css'
-
-type TCard = {
-    children: ReactNode
+type TCard = PropsWithChildren & {
     className?: string
 }
 
 const Card: FC<TCard> = ({ children, className }) => {
-    return <div className={classNames(styles.card, className)}>{children}</div>
+    return (
+        <MuiCard className={className} sx={{ padding: '1em', backgroundColor: 'rgba(0, 0, 0, 0.1)' }}>
+            {children}
+        </MuiCard>
+    )
 }
 
 export default Card
